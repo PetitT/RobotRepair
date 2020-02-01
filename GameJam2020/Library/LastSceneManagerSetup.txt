@@ -1,5 +1,9 @@
 sceneSetups:
+<<<<<<< HEAD
+- path: Assets/Scenes/Game Sylvan.unity
+=======
 - path: Assets/Scenes/Thibaut_Testing.unity
+>>>>>>> 9c5c6ba2723725fa1940c441e969830664d7261c
   isLoaded: 1
   isActive: 1
   isSubScene: 0
