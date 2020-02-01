@@ -15,6 +15,12 @@ public class VignetteIntensity : MonoBehaviour
     private void Start()
     {
         ppv.profile.TryGetSettings<Vignette>(out vignette);
+        Damages_Manager.instance.onDamageTaken += DamageTakenHandler;
+    }
+
+    private void DamageTakenHandler()
+    {
+        StartCoroutine(VignetteIntensityChange());
     }
 
     private IEnumerator VignetteIntensityChange()

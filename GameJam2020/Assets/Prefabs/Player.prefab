@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4072654201724931007}
   - component: {fileID: 4072654201724931006}
-  - component: {fileID: 4072654201724930945}
+  - component: {fileID: 8964424643634753428}
   - component: {fileID: 4072654201724931005}
   - component: {fileID: 4072654201724931004}
   - component: {fileID: 931422605}
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4072654201724930945
+--- !u!114 &8964424643634753428
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,21 +94,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 4072654201724930944}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 640534289bd58dd4c989058b9469c6f1, type: 3}
+  m_Script: {fileID: 11500000, guid: 246e2aafdadfa2d40bbcc12147e37c5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMoveSpeed: 8
+  baseMoveSpeed: 0
   maxXmaxY: {fileID: 0}
   minXminY: {fileID: 0}
-  baseJumpForce: 7
-  gravity: 20
-  groundCheck: {fileID: 4072654202545181871}
+  baseJumpForce: 0
+  gravity: 0
+  groundCheck: {fileID: 0}
   ground:
     serializedVersion: 2
-    m_Bits: 256
-  distanceFromGround: 0.02
-  jumpIncTimer: 0.25
-  jumpIncForce: 20
+    m_Bits: 0
+  distanceFromGround: 0
+  rb: {fileID: 0}
+  jumpIncTimer: 0
+  jumpIncForce: 0
 --- !u!61 &4072654201724931005
 BoxCollider2D:
   m_ObjectHideFlags: 0

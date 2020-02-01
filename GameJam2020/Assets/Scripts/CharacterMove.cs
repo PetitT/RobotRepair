@@ -11,7 +11,7 @@ public class CharacterMove : MonoBehaviour
 
     [Header("Jump")]
     public float baseJumpForce;
-    public float gravity;
+  //  public float gravity;
     public Transform groundCheck;
     public LayerMask ground;
     public float distanceFromGround;

@@ -10,8 +10,9 @@ public class Damages_Manager : MonoBehaviour
 
     public List<Damages_Zone> damagesZoneList = new List<Damages_Zone>();
     public event Action onDeath;
+    public event Action onDamageTaken;
 
-
+    public static Damages_Manager instance;
     #endregion
     #region OnCollision
 
@@ -35,11 +36,13 @@ public class Damages_Manager : MonoBehaviour
                 case InteractableObject.physical:
 
                     CheckList(enemyTypeVar);
+                    onDamageTaken?.Invoke();
 
                     break;
                 case InteractableObject.electric:
 
                     CheckList(enemyTypeVar);
+                    onDamageTaken?.Invoke();
 
                     break;
                 case InteractableObject.ammo:
@@ -57,6 +60,14 @@ public class Damages_Manager : MonoBehaviour
 
     #endregion
     #region Methods
+
+    private void Awake()
+    {
+        if (instance)
+            Destroy(this);
+        else
+            instance = this;
+    }
 
     private void CheckList(InteractableObject interactableObject)
     {
@@ -78,18 +89,13 @@ public class Damages_Manager : MonoBehaviour
             if (disabledZone.Count == 0)
             {
                 onDeath?.Invoke();
-                Debug.Log("Dead");
-            }
-            else
-            {
-                int objectToSet = UnityEngine.Random.Range(0, disabledZone.Count -1);
-
-                disabledZone[objectToSet].Activate(interactableObject);
             }
 
         }
 
+        int objectToSet = UnityEngine.Random.Range(0, disabledZone.Count -1);
 
+        disabledZone[objectToSet].Activate(interactableObject);
     }
     #endregion
 
