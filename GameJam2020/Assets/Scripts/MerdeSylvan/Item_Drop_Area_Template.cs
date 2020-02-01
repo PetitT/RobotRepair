@@ -8,7 +8,7 @@ public abstract class Item_Drop_Area_Template : MonoBehaviour
     #region Variables
 
     public InteractableObject objectNeeded;
-    [HideInInspector] public bool isOn;
+    public bool isOn = false;
 
     #endregion
     #region OnCollision

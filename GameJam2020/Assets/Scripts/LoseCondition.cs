@@ -36,7 +36,6 @@ public class LoseCondition : MonoBehaviour
     private IEnumerator TimerCoroutine()
     {
         yield return new WaitForSeconds(timeBeforeDefeat);
-        Debug.Log("Lost");
         Lost?.Invoke();
     }
 

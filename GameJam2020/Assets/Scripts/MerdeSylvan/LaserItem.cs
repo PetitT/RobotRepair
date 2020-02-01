@@ -20,7 +20,7 @@ public class LaserItem : MonoBehaviour
 
         lifeTime -= Time.deltaTime;
         if (lifeTime < 0)
-            Destroy(this.gameObject);
+            gameObject.SetActive(false);
     }
 
     #endregion
@@ -32,7 +32,7 @@ public class LaserItem : MonoBehaviour
         if(collision.gameObject.tag == "Enemy")
         {
 
-            Destroy(this.gameObject);
+            gameObject.SetActive(false);
 
         }
 

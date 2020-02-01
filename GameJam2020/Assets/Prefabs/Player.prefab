@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4072654201724931007}
   - component: {fileID: 4072654201724931006}
-  - component: {fileID: 4072654201724930945}
+  - component: {fileID: 8964424643634753428}
   - component: {fileID: 4072654201724931005}
   - component: {fileID: 4072654201724931004}
   - component: {fileID: 931422605}
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4072654201724930944}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -8.53, y: -3.72, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.45, y: 0.45, z: 1}
   m_Children:
   - {fileID: 4072654202545181871}
   m_Father: {fileID: 0}
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 90bf19cf6e753df4ca093ea5429f95ba, type: 3}
   m_Color: {r: 0.6619536, g: 1, b: 0.5613208, a: 1}
   m_FlipX: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4072654201724930945
+--- !u!114 &8964424643634753428
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,21 +94,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 4072654201724930944}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 640534289bd58dd4c989058b9469c6f1, type: 3}
+  m_Script: {fileID: 11500000, guid: 246e2aafdadfa2d40bbcc12147e37c5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMoveSpeed: 8
+  baseMoveSpeed: 5
   maxXmaxY: {fileID: 0}
   minXminY: {fileID: 0}
-  baseJumpForce: 7
-  gravity: 20
+  baseJumpForce: 5
   groundCheck: {fileID: 4072654202545181871}
   ground:
     serializedVersion: 2
     m_Bits: 256
-  distanceFromGround: 0.02
-  jumpIncTimer: 0.25
-  jumpIncForce: 20
+  distanceFromGround: 0.1
+  rb: {fileID: 4072654201724931004}
+  jumpIncTimer: 0.3
+  jumpIncForce: 6
 --- !u!61 &4072654201724931005
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -119,7 +119,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.04052186, y: 0.045586705}
@@ -143,7 +143,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4072654201724930944}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -155,7 +155,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 5
 --- !u!114 &931422605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,6 +170,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentItem: 0
   currentLootableObject: 0
+  grabParticle: {fileID: 5407482857221948560, guid: df5b0c32ea3638b4f82f454f6402ee7b,
+    type: 3}
 --- !u!1 &4072654202545181870
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,7 +196,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4072654202545181870}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.48, z: 0}
+  m_LocalPosition: {x: 0, y: -1.59, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4072654201724931007}

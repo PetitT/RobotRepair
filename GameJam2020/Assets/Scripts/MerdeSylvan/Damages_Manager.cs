@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Damages_Manager : MonoBehaviour
@@ -8,12 +9,21 @@ public class Damages_Manager : MonoBehaviour
 
     #region Variables
 
-    public List<Damages_Zone> damagesZoneList = new List<Damages_Zone>();
+    public List<Damages_Zone> damagesZoneList;
     public event Action onDeath;
+    public event Action onDamageTaken;
 
-
+    public static Damages_Manager instance;
     #endregion
     #region OnCollision
+
+    private void Awake()
+    {
+        if (instance)
+            Destroy(this);
+        else
+            instance = this;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -35,11 +45,13 @@ public class Damages_Manager : MonoBehaviour
                 case InteractableObject.physical:
 
                     CheckList(enemyTypeVar);
+                    onDamageTaken?.Invoke();
 
                     break;
                 case InteractableObject.electric:
 
                     CheckList(enemyTypeVar);
+                    onDamageTaken?.Invoke();
 
                     break;
                 case InteractableObject.ammo:
@@ -60,35 +72,24 @@ public class Damages_Manager : MonoBehaviour
 
     private void CheckList(InteractableObject interactableObject)
     {
-
-        // Method to randomly find a Damage zone object who is disable, and active it.
-
         List<Damages_Zone> disabledZone = new List<Damages_Zone>();
 
-        for (int i = 0; i < damagesZoneList.Count; i++)
+        foreach (var item in damagesZoneList)
         {
-
-            if (damagesZoneList[i].isOn == false)
-            {
-
-                disabledZone.Add(damagesZoneList[i]);
-
-            }
-
-            if (disabledZone.Count == 0)
-            {
-                onDeath?.Invoke();
-                Debug.Log("Dead");
-            }
-            else
-            {
-                int objectToSet = UnityEngine.Random.Range(0, disabledZone.Count -1);
-
-                disabledZone[objectToSet].Activate(interactableObject);
-            }
-
+            if (!item.isOn)
+                disabledZone.Add(item);
         }
 
+        if (disabledZone.Count == 1)
+        {
+            onDeath?.Invoke();
+        }
+        else
+        {
+            int objectToSet = UnityEngine.Random.Range(0, disabledZone.Count - 1);
+
+            disabledZone[objectToSet].Activate(interactableObject);
+        }
 
     }
     #endregion

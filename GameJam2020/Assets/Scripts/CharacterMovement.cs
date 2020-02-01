@@ -25,6 +25,7 @@ public class CharacterMovement : MonoBehaviour
     private float currentMoveSpeed;
     private float YMove;
     private bool isJumping = true;
+    private bool isGrounded = true;
 
     private void Start()
     {
@@ -47,25 +48,7 @@ public class CharacterMovement : MonoBehaviour
     private void Move()
     {
         float X = Input.GetAxis("Horizontal");
-
-        //if (X == 0)
-        //{
-        //    anim.SetBool("IsMoving", false);
-        //}
-        //else
-        //{
-        //    if (X > 0)
-        //    {
-        //        body.transform.rotation = new Quaternion(0, 0, 0, 0);
-        //    }
-        //    else
-        //    {
-        //        body.transform.rotation = new Quaternion(0, 180, 0, 0);
-        //    }
-
-            gameObject.transform.Translate(Vector2.right * X * currentMoveSpeed * Time.deltaTime);
-           // anim.SetBool("IsMoving", true);
-        //}
+        gameObject.transform.Translate(Vector2.right * X * currentMoveSpeed * Time.deltaTime);
     }
 
     private void Jump()
@@ -76,7 +59,6 @@ public class CharacterMovement : MonoBehaviour
             {
                 YMove = baseJumpForce;
                 isJumping = true;
-                //anim.SetTrigger("Jump");
                 isIncreasingJump = true;
             }
         }
@@ -111,23 +93,20 @@ public class CharacterMovement : MonoBehaviour
 
     private void ApplyGravity()
     {
-        if (isJumping)
+        if (!isGrounded)
         {
             YMove -= gravity * Time.deltaTime;
-            gameObject.transform.Translate(Vector2.up * YMove * Time.deltaTime);
         }
+        else if(!isJumping)
+        {
+            YMove = 0f;
+        }
+        gameObject.transform.Translate(Vector2.up * YMove * Time.deltaTime);
     }
 
     private void CheckGround()
     {
-        //if (isJumping)
-        //{
-            if (Physics2D.Raycast(groundCheck.position,Vector2.down, distanceFromGround, ground) && YMove < 0)
-            {
-                isJumping = false;
-               // anim.SetTrigger("Land");
-            }
-        //}
+        isGrounded = Physics2D.Raycast(groundCheck.position, Vector2.down, distanceFromGround, ground);
     }
 
     private void ClampPos()

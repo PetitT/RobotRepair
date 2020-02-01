@@ -15,6 +15,12 @@ public class CameraShake : MonoBehaviour
     private void Start()
     {
         basePos = cam.transform.position;
+        Damages_Manager.instance.onDamageTaken += DamageTakenHandler;
+    }
+
+    private void DamageTakenHandler()
+    {
+        StartCoroutine(Shake());
     }
 
     IEnumerator Shake()
@@ -30,7 +36,6 @@ public class CameraShake : MonoBehaviour
             float percentComplete = elapsed / shakeDuration;
             float damper = 1.0f - Mathf.Clamp(4.0f * percentComplete - 3.0f, 0.0f, 1.0f);
 
-            // map value to [-1, 1]
             float x = Random.value * 2.0f - 1.0f;
             float y = Random.value * 2.0f - 1.0f;
             x *= shakeAmount * damper;
