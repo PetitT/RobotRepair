@@ -97,6 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeTime: 5
   speed: 5
+  laserXplode: {fileID: 8300000, guid: e083e5212cc65384a86e58f137c26e3b, type: 3}
 --- !u!61 &267619015843923333
 BoxCollider2D:
   m_ObjectHideFlags: 0

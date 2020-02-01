@@ -99,6 +99,7 @@ MonoBehaviour:
   isOn: 0
   Mecha: {fileID: 0}
   laser: {fileID: 1397723314570742336, guid: 35bf4cf125473b0439907b4cf5a0ed22, type: 3}
+  laserClip: {fileID: 8300000, guid: 821f6de489808244c906e5cdc8820073, type: 3}
 --- !u!61 &4250505115573524247
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -104,6 +104,7 @@ MonoBehaviour:
     type: 3}
   niceParticle: {fileID: 2820131703058658936, guid: e4590d0f615a4b941aede90183d9ca4a,
     type: 3}
+  repairSound: {fileID: 8300000, guid: 0fabc5fa5d7ad4a4cae44a93ea5e3fab, type: 3}
 --- !u!50 &8562888854875612230
 Rigidbody2D:
   serializedVersion: 4

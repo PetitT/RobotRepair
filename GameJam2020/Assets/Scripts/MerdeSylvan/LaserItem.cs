@@ -9,6 +9,8 @@ public class LaserItem : MonoBehaviour
     public float lifeTime;
     public float speed;
 
+    [SerializeField] private AudioClip laserXplode;
+
     #endregion
 
 
@@ -31,6 +33,8 @@ public class LaserItem : MonoBehaviour
         
         if(collision.gameObject.tag == "Enemy")
         {
+
+            SoundManager.instance.PlaySound(laserXplode);
 
             gameObject.SetActive(false);
 
