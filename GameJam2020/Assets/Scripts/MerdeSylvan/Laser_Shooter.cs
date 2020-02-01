@@ -8,10 +8,10 @@ public class Laser_Shooter : Item_Drop_Area_Template
 
     #region Variables
 
-    [SerializeField]
-    Transform Mecha;
-    [SerializeField]
-    GameObject laser;
+    [SerializeField] Transform Mecha;
+    [SerializeField] GameObject laser;
+    [SerializeField] AudioClip laserClip;
+
 
     public event Action onShoot;
 
@@ -28,16 +28,11 @@ public class Laser_Shooter : Item_Drop_Area_Template
 
     public override void ActiveAreaEffects()
     {
-
         if(isOn)
         {
-            // Need to see the good quaternion in Unity, can't find the right parameter only in script...
             Pool.instance.GetItemFromPool(laser, Mecha.position);
-
-            // need a timer who unable the usage of the laser shooter for a while.
-
+            SoundManager.instance.PlaySound(laserClip);
             FindObjectOfType<Inventory>().currentItem = InteractableObject.none;
-
             onShoot?.Invoke();
         }
 
