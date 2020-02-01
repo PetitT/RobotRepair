@@ -24,15 +24,8 @@ public class Death : MonoBehaviour
         Damages_Manager.instance.onDeath -= DeathHandler;
     }
 
-    private void OnEnable()
-    {
-        Damages_Manager.instance.onDeath += DeathHandler;
-
-    }
-
     private void DeathHandler()
     {
-
         Died?.Invoke();
         Damages_Manager.instance.onDeath -= DeathHandler;
     }
