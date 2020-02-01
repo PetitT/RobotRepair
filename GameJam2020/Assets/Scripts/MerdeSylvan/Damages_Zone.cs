@@ -12,6 +12,7 @@ public class Damages_Zone : Item_Drop_Area_Template
 
     [SerializeField] private GameObject electricParticle, physicalParticle;
     [SerializeField] private GameObject niceParticle;
+    [SerializeField] private AudioClip repairSound;
 
     #endregion
     #region Start
@@ -29,6 +30,9 @@ public class Damages_Zone : Item_Drop_Area_Template
         Inventory.instance.SetCurrentItem(InteractableObject.none);
         objectNeeded = InteractableObject.none;
         Pool.instance.GetItemFromPool(niceParticle, transform.position);
+
+        SoundManager.instance.PlaySound(repairSound);
+
         sprite.enabled = false;
         isOn = false;
     }

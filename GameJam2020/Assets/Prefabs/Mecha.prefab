@@ -71,7 +71,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 294c5bdd2e454cc4cb3b1cf1f8a15752, type: 3}
   m_Color: {r: 0.22467959, g: 0.5901569, b: 0.9339623, a: 1}
   m_FlipX: 0
@@ -101,6 +101,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  punchSound: {fileID: 8300000, guid: 5645463b3f7009844b3fc946fd447de0, type: 3}
+  explosionSound: {fileID: 8300000, guid: e083e5212cc65384a86e58f137c26e3b, type: 3}
 --- !u!61 &7354592310977842012
 BoxCollider2D:
   m_ObjectHideFlags: 0

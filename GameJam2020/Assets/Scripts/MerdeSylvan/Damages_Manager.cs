@@ -13,6 +13,9 @@ public class Damages_Manager : MonoBehaviour
     public event Action onDeath;
     public event Action onDamageTaken;
 
+    [SerializeField] private AudioClip punchSound;
+    [SerializeField] private AudioClip explosionSound;
+
     public static Damages_Manager instance;
     #endregion
     #region OnCollision
@@ -32,6 +35,8 @@ public class Damages_Manager : MonoBehaviour
 
         if (collision.gameObject.tag == "Enemy")
         {
+
+            SoundManager.instance.PlaySound(punchSound);
 
             InteractableObject enemyTypeVar = collision.gameObject.GetComponent<EnemyIdentifyer>().ID;
 
@@ -62,6 +67,8 @@ public class Damages_Manager : MonoBehaviour
                 default:
                     break;
             }
+
+            SoundManager.instance.PlaySound(explosionSound);
 
         }
 

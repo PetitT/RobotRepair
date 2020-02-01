@@ -9,6 +9,7 @@ public class Inventory : MonoBehaviour
     public InteractableObject currentLootableObject;
 
     [SerializeField] private GameObject grabParticle;
+    [SerializeField] private AudioClip grabSound;
 
     public static Inventory instance;
 
@@ -27,7 +28,11 @@ public class Inventory : MonoBehaviour
             currentItem = currentLootableObject;
             if(currentItem != InteractableObject.none)
             {
+
+                SoundManager.instance.PlaySound(grabSound);
+
                 Pool.instance.GetItemFromPool(grabParticle, transform.position);
+
             }
         }
     }
