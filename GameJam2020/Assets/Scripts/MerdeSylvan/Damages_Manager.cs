@@ -11,17 +11,6 @@ public class Damages_Manager : MonoBehaviour
     public List<Damages_Zone> damagesZoneList = new List<Damages_Zone>();
     public event Action onDeath;
 
-    bool gameOver;
-
-    #endregion
-    #region Start
-
-    private void Start()
-    {
-
-        gameOver = false;
-
-    }
 
     #endregion
     #region OnCollision
@@ -93,7 +82,7 @@ public class Damages_Manager : MonoBehaviour
             }
             else
             {
-                int objectToSet = UnityEngine.Random.Range(0, disabledZone.Count);
+                int objectToSet = UnityEngine.Random.Range(0, disabledZone.Count -1);
 
                 disabledZone[objectToSet].Activate(interactableObject);
             }

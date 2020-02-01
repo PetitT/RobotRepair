@@ -10,6 +10,11 @@ public class Damages_Zone : Item_Drop_Area_Template
     [SerializeField]
     GameObject Mecha;
 
+    [SerializeField]
+    SpriteRenderer ownSelf;
+
+    public int typeOfDamage;
+
     #endregion
     #region Start
 
@@ -17,6 +22,7 @@ public class Damages_Zone : Item_Drop_Area_Template
     {
 
         Mecha.GetComponent<Damages_Manager>().damagesZoneList.Add(this);
+        ownSelf.enabled = false;
 
     }
 
@@ -27,8 +33,8 @@ public class Damages_Zone : Item_Drop_Area_Template
     {
         FindObjectOfType<Inventory>().currentItem = InteractableObject.none;
         objectNeeded = InteractableObject.none;
-        // var who say to the Script made by Nicolas to remove the object he is holding
-        // disable the animator(hide the gameobject)
+
+        ownSelf.enabled = false;
         isOn = false;
 
     }
@@ -36,8 +42,27 @@ public class Damages_Zone : Item_Drop_Area_Template
     public void Activate(InteractableObject interactableObject)
     {
         objectNeeded = interactableObject;
+
+        ownSelf.enabled = true;
+
+        if (objectNeeded == InteractableObject.electric)
+        {
+
+            Color newColor = new Color(0.8822017f, 1f, 0f);
+
+            ownSelf.color = newColor;
+
+        }
+        else if(objectNeeded == InteractableObject.physical)
+        {
+
+            Color newColor = new Color(0.7254902f, 0f, 0.2806867f);
+
+            ownSelf.color = newColor;
+
+        }
+
         isOn = true;
-        // animator fonction to show the zone
 
     }
 
