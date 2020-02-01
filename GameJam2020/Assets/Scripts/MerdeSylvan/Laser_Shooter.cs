@@ -12,7 +12,6 @@ public class Laser_Shooter : Item_Drop_Area_Template
     [SerializeField] GameObject laser;
     [SerializeField] AudioClip laserClip;
 
-
     public event Action onShoot;
 
     #endregion

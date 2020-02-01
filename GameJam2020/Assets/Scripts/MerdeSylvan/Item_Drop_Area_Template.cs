@@ -9,17 +9,20 @@ public abstract class Item_Drop_Area_Template : MonoBehaviour
 
     public InteractableObject objectNeeded;
     public bool isOn = false;
+    [SerializeField] SpriteRenderer aura;
 
     #endregion
     #region OnCollision
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-        if(collision.gameObject.tag == "Player" && isOn)
-        {
 
-            if(collision.gameObject.GetComponent<Inventory>().currentItem == objectNeeded)
+        if (collision.gameObject.tag == "Player" && isOn)
+        {
+            if (aura != null)
+                aura.enabled = true;
+
+            if (collision.gameObject.GetComponent<Inventory>().currentItem == objectNeeded)
             {
 
                 ActiveAreaEffects();
@@ -27,6 +30,14 @@ public abstract class Item_Drop_Area_Template : MonoBehaviour
             }
 
         }
+
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+
+        if (aura != null)
+            aura.enabled = false;
 
     }
 
