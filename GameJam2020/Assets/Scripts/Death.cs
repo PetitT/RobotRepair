@@ -13,6 +13,7 @@ public class Death : MonoBehaviour
     // Cette classe sert juste d'exmple 
     // Elle devra s'abonner au "Damage Manager" et Invoke l'event quand les dégâts atteindront leur maximum
 
+<<<<<<< HEAD
     private void Start()
     {
         Damages_Manager.instance.onDeath += DeathHandler;
@@ -21,10 +22,25 @@ public class Death : MonoBehaviour
     private void OnDisable()
     {
         Damages_Manager.instance.onDeath -= DeathHandler;
+=======
+    private void OnEnable()
+    {
+        Damages_Manager.instance.onDeath += DeathHandler;
+>>>>>>> 9c5c6ba2723725fa1940c441e969830664d7261c
+    }
+
+    private void DeathHandler()
+    {
+<<<<<<< HEAD
+        Died?.Invoke();
+    }
+=======
+        Damages_Manager.instance.onDeath -= DeathHandler;
     }
 
     private void DeathHandler()
     {
         Died?.Invoke();
     }
+>>>>>>> 9c5c6ba2723725fa1940c441e969830664d7261c
 }
