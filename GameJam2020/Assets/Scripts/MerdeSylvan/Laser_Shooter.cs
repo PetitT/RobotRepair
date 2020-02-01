@@ -32,7 +32,7 @@ public class Laser_Shooter : Item_Drop_Area_Template
         if(isOn)
         {
             // Need to see the good quaternion in Unity, can't find the right parameter only in script...
-            Instantiate(laser, (Vector2)Mecha.position, Quaternion.Euler(0,0,0));
+            Pool.instance.GetItemFromPool(laser, Mecha.position);
 
             // need a timer who unable the usage of the laser shooter for a while.
 

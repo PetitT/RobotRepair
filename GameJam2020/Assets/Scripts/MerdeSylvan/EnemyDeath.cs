@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyDeath : MonoBehaviour
 {
-
+    [SerializeField] private GameObject explosion;
     #region Trigger
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -12,8 +12,8 @@ public class EnemyDeath : MonoBehaviour
         
         if(collision.gameObject.tag == "Player")
         {
-
-            Destroy(this.gameObject);
+            Pool.instance.GetItemFromPool(explosion, transform.position);
+            gameObject.SetActive(false);
 
         }
 

@@ -41,13 +41,12 @@ public class EnnemyFactory : MonoBehaviour
         int random = UnityEngine.Random.Range(0, 2);
         if(random == 0)
         {
-            newEnnemy = Instantiate(electricEnnemy);
+            newEnnemy = Pool.instance.GetItemFromPool(electricEnnemy, spawnPos.position);
         }
         else
         {
-            newEnnemy = Instantiate(physicalEnnemy);
+            newEnnemy = Pool.instance.GetItemFromPool(physicalEnnemy, spawnPos.position);
         }
         newEnnemy.GetComponent<LinearMovement>().speed = ennemySpeed;
-        newEnnemy.transform.position = spawnPos.position;
     }
 }

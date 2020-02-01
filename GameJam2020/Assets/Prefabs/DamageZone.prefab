@@ -97,8 +97,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectNeeded: 0
   isOn: 0
-  Mecha: {fileID: 0}
-  ownSelf: {fileID: 3708330516828896024}
+  sprite: {fileID: 3708330516828896024}
+  electricParticle: {fileID: 2813095031033898634, guid: 1e6db1c8f79933d40a58cf1c70b72e24,
+    type: 3}
+  physicalParticle: {fileID: 3324480691235263509, guid: a6b797b34be50ca4cb762d7dc8d55d1b,
+    type: 3}
+  niceParticle: {fileID: 2820131703058658936, guid: e4590d0f615a4b941aede90183d9ca4a,
+    type: 3}
 --- !u!50 &8562888854875612230
 Rigidbody2D:
   serializedVersion: 4

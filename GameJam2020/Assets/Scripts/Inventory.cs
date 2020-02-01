@@ -8,11 +8,27 @@ public class Inventory : MonoBehaviour
 
     public InteractableObject currentLootableObject;
 
+    [SerializeField] private GameObject grabParticle;
+
+    public static Inventory instance;
+
+    private void Awake()
+    {
+        if (instance)
+            Destroy(this);
+        else
+            instance = this;
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
             currentItem = currentLootableObject;
+            if(currentItem != InteractableObject.none)
+            {
+                Pool.instance.GetItemFromPool(grabParticle, transform.position);
+            }
         }
     }
 
@@ -20,23 +36,6 @@ public class Inventory : MonoBehaviour
     {
         if (collision.CompareTag("LootablePile"))
         {
-            //if (Input.GetKeyDown(KeyCode.F) && !isHolding)
-            //{
-            //    InteractableObject itemToLoot = collision.GetComponent<LootablePile>().item;
-            //    Debug.Log("Button pressed");
-            //    if (itemToLoot == InteractableObject.none)
-            //    {
-            //        Debug.Log("TOPKEK C IMPOSSIBLE");
-            //    }
-            //    else
-            //    {
-            //        currentItem = itemToLoot;
-            //        isHolding = true;
-            //        Debug.Log(currentItem);
-            //    }
-
-            //}
-
             currentLootableObject = collision.GetComponent<LootablePile>().item;
         }
     }
@@ -47,6 +46,11 @@ public class Inventory : MonoBehaviour
         {
             currentLootableObject = InteractableObject.none;
         }
+    }
+
+    public void SetCurrentItem(InteractableObject item)
+    {
+        currentItem = item;
     }
 }
 

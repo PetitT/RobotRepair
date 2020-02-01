@@ -21,7 +21,6 @@ public class EndOfGame : MonoBehaviour
 
     private void LoseCondition_Lost()
     {
-        Debug.Log("End of game");
         // Tout ce qui se passe lors de la défaite
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
