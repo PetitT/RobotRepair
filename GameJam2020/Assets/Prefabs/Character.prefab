@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2472010140939646788}
   - component: {fileID: 2472010140939646789}
   - component: {fileID: 2472010140939646786}
+  - component: {fileID: 2472010141611652227}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 2472010140939646782}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.45, y: 1.01, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.494, y: 0.494, z: 0.494}
   m_Children:
   - {fileID: 2472010141021230710}
   m_Father: {fileID: 0}
@@ -116,13 +117,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 640534289bd58dd4c989058b9469c6f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  horizontalAxis: 
+  jump: 
   anim: {fileID: 2472010140939646785}
   sprite: {fileID: 2472010140939646784}
   baseMoveSpeed: 5
   maxXmaxY: {fileID: 0}
   minXminY: {fileID: 0}
   baseJumpForce: 10
-  gravity: 10
+  gravity: 20
   groundCheck: {fileID: 2472010141021230710}
   ground:
     serializedVersion: 2
@@ -268,6 +271,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2472010141611652227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2472010140939646782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3ccb83d0ec453e4fb6124f469fc8096, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentItem: 0
+  currentLootableObject: 0
+  grabParticle: {fileID: 5407482857221948560, guid: df5b0c32ea3638b4f82f454f6402ee7b,
+    type: 3}
+  grabSound: {fileID: 8300000, guid: fc8e785edcb97024086c3946091887e8, type: 3}
 --- !u!1 &2472010141021230711
 GameObject:
   m_ObjectHideFlags: 0

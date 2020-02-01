@@ -8,6 +8,7 @@ public class Inventory : MonoBehaviour
 
     public InteractableObject currentLootableObject;
 
+    [SerializeField] private string grab;
     [SerializeField] private GameObject grabParticle;
     [SerializeField] private AudioClip grabSound;
 
@@ -23,8 +24,9 @@ public class Inventory : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetButtonDown(grab))
         {
+            Debug.Log("hiku");
             currentItem = currentLootableObject;
             if(currentItem != InteractableObject.none)
             {

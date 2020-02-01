@@ -15,7 +15,7 @@ public class SoundManager : MonoBehaviour
             instance = this;
     }
 
-    public void PlaySound(AudioClip clip)
+    public virtual void PlaySound(AudioClip clip)
     {
         audioSrc.PlayOneShot(clip);
     }
