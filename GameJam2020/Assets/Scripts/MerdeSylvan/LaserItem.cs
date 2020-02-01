@@ -32,7 +32,7 @@ public class LaserItem : MonoBehaviour
         if(collision.gameObject.tag == "Enemy")
         {
 
-            Destroy(this);
+            Destroy(this.gameObject);
 
         }
 

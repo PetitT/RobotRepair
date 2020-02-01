@@ -4,7 +4,7 @@ using System.Collections;
 public class LinearMovement : MonoBehaviour
 {
 
-    [SerializeField]
+    [HideInInspector]
     public float speed = 1.0F;
 
     [SerializeField]
