@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
+
+    [Header("Controls")]
+    public string horizontalAxis;
+    public string jump;
+
+    [Header("Animation")]
     public Animator anim;
     public SpriteRenderer sprite;
 
@@ -55,7 +61,7 @@ public class CharacterMovement : MonoBehaviour
 
     private void Move()
     {
-        float X = Input.GetAxis("Horizontal");
+        float X = Input.GetAxis(horizontalAxis);
         gameObject.transform.Translate(Vector2.right * X * currentMoveSpeed * Time.deltaTime);
 
         if (X == 0)
@@ -80,7 +86,7 @@ public class CharacterMovement : MonoBehaviour
     {
         if (isGrounded)
         {
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown(jump) )
             {
                 isGrounded = false;
                 YMove = baseJumpForce;
@@ -95,7 +101,7 @@ public class CharacterMovement : MonoBehaviour
     {
         if (isIncreasingJump)
         {
-            if (Input.GetKey(KeyCode.Space) || Input.GetButton("Jump"))
+            if (Input.GetButton(jump))
             {
                 currentJumpIncTimer -= Time.deltaTime;
                 YMove += jumpIncForce * Time.deltaTime;
@@ -107,7 +113,7 @@ public class CharacterMovement : MonoBehaviour
                 }
             }
 
-            if (Input.GetKeyUp(KeyCode.Space) || Input.GetButtonUp("Jump"))
+            if (Input.GetButtonUp(jump))
             {
                 isIncreasingJump = false;
                 currentJumpIncTimer = jumpIncTimer;
