@@ -8,6 +8,8 @@ public class LoseCondition : MonoBehaviour
 
     [SerializeField]
     private float timeBeforeDefeat = 3.0F;
+    [SerializeField]
+    private GameObject deathScreen;
 
     public event Action Lost;
 
@@ -31,6 +33,7 @@ public class LoseCondition : MonoBehaviour
     private void Death_Died()
     {
         StartCoroutine(TimerCoroutine());
+        deathScreen.SetActive(true);
     }
 
     private IEnumerator TimerCoroutine()

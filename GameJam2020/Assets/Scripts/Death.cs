@@ -13,7 +13,7 @@ public class Death : MonoBehaviour
     // Cette classe sert juste d'exmple 
     // Elle devra s'abonner au "Damage Manager" et Invoke l'event quand les dégâts atteindront leur maximum
 
-    private void OnEnable()
+    private void Start()
     {
         Damages_Manager.instance.onDeath += DeathHandler;
     }
