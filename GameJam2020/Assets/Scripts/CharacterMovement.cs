@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
+    public Animator anim;
+    public SpriteRenderer sprite;
+
+    public enum AnimState { idle, running, jumping, falling, landing }
+
     [Header("Movement")]
     public float baseMoveSpeed;
     public Transform maxXmaxY, minXminY;
@@ -24,8 +29,11 @@ public class CharacterMovement : MonoBehaviour
     private float currentJumpIncTimer;
     private float currentMoveSpeed;
     private float YMove;
-    private bool isJumping = true;
-    private bool isGrounded = true;
+    private bool isJumping = false;
+    private bool isGrounded = false;
+    private bool isFalling = false;
+
+    private AnimState currentState = AnimState.idle;
 
     private void Start()
     {
@@ -38,10 +46,10 @@ public class CharacterMovement : MonoBehaviour
         Move();
         Jump();
         IncreaseJump();
-        CheckJumpButton();
         ApplyGravity();
         CheckGround();
         ClampPos();
+        CheckFall();
     }
 
 
@@ -49,17 +57,36 @@ public class CharacterMovement : MonoBehaviour
     {
         float X = Input.GetAxis("Horizontal");
         gameObject.transform.Translate(Vector2.right * X * currentMoveSpeed * Time.deltaTime);
+
+        if (X == 0)
+        {
+            ChangeAnimState(AnimState.idle);
+        }
+        else
+        {
+            if (X > 0)
+            {
+                sprite.flipX = false;
+            }
+            else
+            {
+                sprite.flipX = true;
+            }
+            ChangeAnimState(AnimState.running);
+        }
     }
 
     private void Jump()
     {
-        if (!isJumping)
+        if (isGrounded)
         {
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump"))
             {
+                isGrounded = false;
                 YMove = baseJumpForce;
                 isJumping = true;
                 isIncreasingJump = true;
+                ChangeAnimState(AnimState.jumping);
             }
         }
     }
@@ -68,21 +95,18 @@ public class CharacterMovement : MonoBehaviour
     {
         if (isIncreasingJump)
         {
-            currentJumpIncTimer -= Time.deltaTime;
-            YMove += jumpIncForce * Time.deltaTime;
-
-            if (currentJumpIncTimer <= 0)
+            if (Input.GetKey(KeyCode.Space) || Input.GetButton("Jump"))
             {
-                currentJumpIncTimer = jumpIncTimer;
-                isIncreasingJump = false;
-            }
-        }
-    }
+                currentJumpIncTimer -= Time.deltaTime;
+                YMove += jumpIncForce * Time.deltaTime;
 
-    private void CheckJumpButton()
-    {
-        if (isIncreasingJump)
-        {
+                if (currentJumpIncTimer <= 0)
+                {
+                    currentJumpIncTimer = jumpIncTimer;
+                    isIncreasingJump = false;
+                }
+            }
+
             if (Input.GetKeyUp(KeyCode.Space) || Input.GetButtonUp("Jump"))
             {
                 isIncreasingJump = false;
@@ -97,7 +121,7 @@ public class CharacterMovement : MonoBehaviour
         {
             YMove -= gravity * Time.deltaTime;
         }
-        else if(!isJumping)
+        else if (isGrounded)
         {
             YMove = 0f;
         }
@@ -106,7 +130,27 @@ public class CharacterMovement : MonoBehaviour
 
     private void CheckGround()
     {
-        isGrounded = Physics2D.Raycast(groundCheck.position, Vector2.down, distanceFromGround, ground);
+        if (isFalling)
+            isGrounded = Physics2D.Raycast(groundCheck.position, Vector2.down, distanceFromGround, ground);
+
+        if (isGrounded)
+            ChangeAnimState(AnimState.landing);
+    }
+
+    private void CheckFall()
+    {
+        if (YMove <= 0)
+        {
+            isFalling = true;            
+        }
+        else if (YMove > 0)
+        {
+            isFalling = false;
+            ChangeAnimState(AnimState.landing);
+        }
+
+        if (YMove < 0)
+            ChangeAnimState(AnimState.falling);
     }
 
     private void ClampPos()
@@ -125,5 +169,34 @@ public class CharacterMovement : MonoBehaviour
             Y = maxXmaxY.position.y;
 
         transform.position = new Vector2(X, Y);
+    }
+
+    private void ChangeAnimState(AnimState newState)
+    {
+        if(newState != currentState)
+        {
+            currentState = newState;
+
+            switch (currentState)
+            {
+                case AnimState.idle:
+                    anim.SetBool("IsWalking", false);
+                    break;
+                case AnimState.running:
+                    anim.SetBool("IsWalking", true);
+                    break;
+                case AnimState.jumping:
+                    anim.SetTrigger("Jump");
+                    break;
+                case AnimState.falling:
+                    anim.SetBool("IsFalling", true);
+                    break;
+                case AnimState.landing:
+                    anim.SetBool("IsFalling", false);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }
