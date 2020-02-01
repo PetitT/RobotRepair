@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterMovement : MonoBehaviour
+public class CharacterMove : MonoBehaviour
 {
     [Header("Movement")]
     public float baseMoveSpeed;
@@ -14,94 +15,75 @@ public class CharacterMovement : MonoBehaviour
     public Transform groundCheck;
     public LayerMask ground;
     public float distanceFromGround;
+    public Rigidbody2D rb;
 
     [Header("JumpIncrease")]
     public float jumpIncTimer;
     public float jumpIncForce;
+
     private bool isIncreasingJump = false;
-
-
     private float currentJumpIncTimer;
-    private float currentMoveSpeed;
-    private float YMove;
+    private float currentJumpForce;
+    private float currentGravityForce;
     private bool isJumping = true;
     private bool isGrounded = true;
 
     private void Start()
     {
-        currentMoveSpeed = baseMoveSpeed;
         currentJumpIncTimer = jumpIncTimer;
     }
 
-    void Update()
+    private void Update()
     {
         Move();
-        Jump();
-        IncreaseJump();
-        CheckJumpButton();
-        ApplyGravity();
         CheckGround();
         ClampPos();
     }
 
+    private void FixedUpdate()
+    {
+        Jump();
+        IncreaseJump();
+    }
 
     private void Move()
     {
         float X = Input.GetAxis("Horizontal");
-        gameObject.transform.Translate(Vector2.right * X * currentMoveSpeed * Time.deltaTime);
+        gameObject.transform.Translate(Vector2.right * X * baseMoveSpeed * Time.deltaTime);
     }
 
     private void Jump()
     {
-        if (!isJumping)
+        if (isGrounded)
         {
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump"))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                YMove = baseJumpForce;
                 isJumping = true;
-                isIncreasingJump = true;
+                currentJumpIncTimer = jumpIncTimer;
+                rb.velocity = Vector2.up * baseJumpForce;
             }
         }
     }
 
     private void IncreaseJump()
     {
-        if (isIncreasingJump)
+        if(Input.GetKey(KeyCode.Space) && isJumping)
         {
-            currentJumpIncTimer -= Time.deltaTime;
-            YMove += jumpIncForce * Time.deltaTime;
-
-            if (currentJumpIncTimer <= 0)
+            if(currentJumpIncTimer > 0)
             {
-                currentJumpIncTimer = jumpIncTimer;
-                isIncreasingJump = false;
+                rb.velocity = Vector2.up * baseJumpForce;
+                currentJumpIncTimer -= Time.deltaTime;
+            }
+            else
+            {
+                isJumping = false;
             }
         }
-    }
 
-    private void CheckJumpButton()
-    {
-        if (isIncreasingJump)
+        if (Input.GetKeyUp(KeyCode.Space))
         {
-            if (Input.GetKeyUp(KeyCode.Space) || Input.GetButtonUp("Jump"))
-            {
-                isIncreasingJump = false;
-                currentJumpIncTimer = jumpIncTimer;
-            }
+            isJumping = false;
         }
-    }
-
-    private void ApplyGravity()
-    {
-        if (!isGrounded)
-        {
-            YMove -= gravity * Time.deltaTime;
-        }
-        else if(!isJumping)
-        {
-            YMove = 0f;
-        }
-        gameObject.transform.Translate(Vector2.up * YMove * Time.deltaTime);
     }
 
     private void CheckGround()
