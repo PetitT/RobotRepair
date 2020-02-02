@@ -7,7 +7,7 @@ public class StartGame : MonoBehaviour
 {
     public void BeginSoloGame()
     {
-        SceneManager.LoadScene("SoloGame");
+        SceneManager.LoadScene("SinglePlayerGame");
     }
 
     public void BeginCoopGame()

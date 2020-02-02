@@ -9,12 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/LaunchMenu.unity
     guid: a5dab049ca1ef1746909a4e5f4f7dffd
   - enabled: 1
-    path: Assets/Scenes/SoloGame.unity
-    guid: 542f39d815a899b4fae82ff569cf3447
-  - enabled: 1
     path: Assets/Scenes/CoopGame.unity
     guid: 3537491b8690dcb4fb51ca8ebf5471bb
   - enabled: 1
-    path: Assets/Scenes/Game.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/SinglePlayerGame.unity
+    guid: 0dc93de67eb67f24ca6e9d54ef4aa768
   m_configObjects: {}

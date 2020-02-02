@@ -19,6 +19,13 @@ public class EndOfGame : MonoBehaviour
         this.loseCondition.Lost += LoseCondition_Lost;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            SceneManager.LoadScene("LaunchMenu");
+    }
+
+
     private void LoseCondition_Lost()
     {
         // Tout ce qui se passe lors de la défaite
