@@ -18,6 +18,11 @@ public class CharacterMovement : MonoBehaviour
     [Header("Movement")]
     public float baseMoveSpeed;
     public Transform maxXmaxY, minXminY;
+    public LayerMask wall;
+    public List<Transform> wallchecksRight;
+    public List<Transform> wallchecksLeft;
+    private List<Transform> currentWallChecks;
+    public float wallDistance;
 
     [Header("Jump")]
     public float baseJumpForce;
@@ -64,24 +69,40 @@ public class CharacterMovement : MonoBehaviour
     private void Move()
     {
         float X = Input.GetAxis(horizontalAxis);
-        gameObject.transform.Translate(Vector2.right * X * currentMoveSpeed * Time.deltaTime);
 
         if (X == 0)
         {
             ChangeAnimState(AnimState.idle);
+            currentWallChecks = null;
         }
         else
         {
             if (X > 0)
             {
                 sprite.flipX = false;
+                currentWallChecks = wallchecksRight;
             }
             else
             {
                 sprite.flipX = true;
+                currentWallChecks = wallchecksLeft;
             }
             ChangeAnimState(AnimState.running);
         }
+
+        if (currentWallChecks != null)
+        {
+            foreach (var wallcheck in currentWallChecks)
+            {
+                if (Physics2D.Raycast(wallcheck.position, Vector2.right, wallDistance, wall))
+                {
+                    X = 0;
+                }
+            }
+        }
+
+        gameObject.transform.Translate(Vector2.right * X * currentMoveSpeed * Time.deltaTime);
+
     }
 
     private void Jump()
@@ -149,12 +170,12 @@ public class CharacterMovement : MonoBehaviour
     {
         if (YMove <= 0)
         {
-            isFalling = true;            
+            isFalling = true;
         }
         else if (YMove > 0)
         {
             isFalling = false;
-            ChangeAnimState(AnimState.landing);
+            // ChangeAnimState(AnimState.landing);
         }
 
         if (YMove < 0)
@@ -181,7 +202,7 @@ public class CharacterMovement : MonoBehaviour
 
     private void ChangeAnimState(AnimState newState)
     {
-        if(newState != currentState)
+        if (newState != currentState)
         {
             currentState = newState;
 
@@ -195,12 +216,15 @@ public class CharacterMovement : MonoBehaviour
                     break;
                 case AnimState.jumping:
                     anim.SetTrigger("Jump");
+                    anim.SetBool("IsGrounded", false);
                     break;
                 case AnimState.falling:
                     anim.SetBool("IsFalling", true);
+                    anim.SetBool("IsGrounded", false);
                     break;
                 case AnimState.landing:
                     anim.SetBool("IsFalling", false);
+                    anim.SetBool("IsGrounded", true);
                     break;
                 default:
                     break;
