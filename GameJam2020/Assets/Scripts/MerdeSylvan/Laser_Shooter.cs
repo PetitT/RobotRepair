@@ -13,6 +13,7 @@ public class Laser_Shooter : Item_Drop_Area_Template
     [SerializeField] GameObject laser;
     [SerializeField] GameObject ultraLaser;
     [SerializeField] AudioClip laserClip;
+    [SerializeField] Animator anim;
 
     private float ultraStart = 0f;
     public float ultraCooldown = 10f;
@@ -38,7 +39,10 @@ public class Laser_Shooter : Item_Drop_Area_Template
            
             Pool.instance.GetItemFromPool(laser, Mecha.position);
             SoundManager.instance.PlaySound(laserClip);
-            FindObjectOfType<Inventory>().currentItem1 = InteractableObject.none;
+            Inventory.instance.SetCurrentItem1(InteractableObject.none);
+
+
+            anim.SetTrigger("CannonOne");
 
             onShoot?.Invoke();
 
@@ -52,7 +56,8 @@ public class Laser_Shooter : Item_Drop_Area_Template
         {
             Pool.instance.GetItemFromPool(laser, Mecha.position);
             SoundManager.instance.PlaySound(laserClip);
-            FindObjectOfType<Inventory>().currentItem2 = InteractableObject.none;
+            Inventory.instance.SetCurrentItem2(InteractableObject.none);
+            anim.SetTrigger("CannonOne");
 
             onShoot?.Invoke();
         }
@@ -75,6 +80,7 @@ public class Laser_Shooter : Item_Drop_Area_Template
 
 
             Pool.instance.GetItemFromPool(ultraLaser, Mecha.position);
+            anim.SetTrigger("FIRE");
 
         }
 
