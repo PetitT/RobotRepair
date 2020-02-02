@@ -17,6 +17,8 @@ public class Inventory : MonoBehaviour
     [SerializeField] private GameObject grabParticle;
     [SerializeField] private AudioClip grabSound;
     [SerializeField] private SpriteRenderer superAmmoSpriteInfo;
+    [SerializeField] private GameObject scrap1, electric1, ammo1;
+    [SerializeField] private GameObject scrap2, electric2, ammo2;
 
     [SerializeField]
     private GameObject Player1;
@@ -37,9 +39,35 @@ public class Inventory : MonoBehaviour
     {
         if (Input.GetButtonDown(grab1))
         {
-            Debug.Log("hiku");
             currentItem1 = currentLootableObject1;
-            if(currentItem1 != InteractableObject.none)
+
+            switch (currentItem1)
+            {
+                case InteractableObject.none:
+                    scrap1.SetActive(false);
+                    electric1.SetActive(false);
+                    ammo1.SetActive(false);
+                    break;
+                case InteractableObject.physical:
+                    scrap1.SetActive(true);
+                    electric1.SetActive(false);
+                    ammo1.SetActive(false);
+                    break;
+                case InteractableObject.electric:
+                    scrap1.SetActive(false);
+                    electric1.SetActive(true);
+                    ammo1.SetActive(false);
+                    break;
+                case InteractableObject.ammo:
+                    scrap1.SetActive(false);
+                    electric1.SetActive(false);
+                    ammo1.SetActive(true);
+                    break;
+                default:
+                    break;
+            }
+
+            if (currentItem1 != InteractableObject.none)
             {
 
                 SoundManager.instance.PlaySound(grabSound);
@@ -66,8 +94,34 @@ public class Inventory : MonoBehaviour
 
         if (Input.GetButtonDown(grab2))
         {
-            Debug.Log("hiku");
             currentItem2 = currentLootableObject2;
+
+            switch (currentItem2)
+            {
+                case InteractableObject.none:
+                    scrap2.SetActive(false);
+                    electric2.SetActive(false);
+                    ammo2.SetActive(false);
+                    break;
+                case InteractableObject.physical:
+                    scrap2.SetActive(true);
+                    electric2.SetActive(false);
+                    ammo2.SetActive(false);
+                    break;
+                case InteractableObject.electric:
+                    scrap2.SetActive(false);
+                    electric2.SetActive(true);
+                    ammo2.SetActive(false);
+                    break;
+                case InteractableObject.ammo:
+                    scrap2.SetActive(false);
+                    electric2.SetActive(false);
+                    ammo2.SetActive(true);
+                    break;
+                default:
+                    break;
+            }
+
             if (currentItem2 != InteractableObject.none)
             {
 
@@ -83,12 +137,63 @@ public class Inventory : MonoBehaviour
     public void SetCurrentItem1(InteractableObject item)
     {
         currentItem1 = item;
+
+        switch (item)
+        {
+            case InteractableObject.none:
+                scrap1.SetActive(false);
+                electric1.SetActive(false);
+                ammo1.SetActive(false);
+                break;
+            case InteractableObject.physical:
+                scrap1.SetActive(true);
+                electric1.SetActive(false);
+                ammo1.SetActive(false);
+                break;
+            case InteractableObject.electric:
+                scrap1.SetActive(false);
+                electric1.SetActive(true);
+                ammo1.SetActive(false);
+                break;
+            case InteractableObject.ammo:
+                scrap1.SetActive(false);
+                electric1.SetActive(false);
+                ammo1.SetActive(true);
+                break;
+            default:
+                break;
+        }
     }
 
     public void SetCurrentItem2(InteractableObject item)
     {
         currentItem2 = item;
-    }
 
+        switch (item)
+        {
+            case InteractableObject.none:
+                scrap2.SetActive(false);
+                electric2.SetActive(false);
+                ammo2.SetActive(false);
+                break;
+            case InteractableObject.physical:
+                scrap2.SetActive(true);
+                electric2.SetActive(false);
+                ammo2.SetActive(false);
+                break;
+            case InteractableObject.electric:
+                scrap2.SetActive(false);
+                electric2.SetActive(true);
+                ammo2.SetActive(false);
+                break;
+            case InteractableObject.ammo:
+                scrap2.SetActive(false);
+                electric2.SetActive(false);
+                ammo2.SetActive(true);
+                break;
+            default:
+                break;
+        }
+    }
 }
 

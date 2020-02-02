@@ -14,6 +14,7 @@ public class Damages_Zone : Item_Drop_Area_Template
     [SerializeField] private GameObject niceParticle;
     [SerializeField] private AudioClip repairSound;
 
+    private GameObject currentParticle;
     #endregion
     #region Start
 
@@ -29,10 +30,10 @@ public class Damages_Zone : Item_Drop_Area_Template
     {
         Inventory.instance.SetCurrentItem1(InteractableObject.none);
         objectNeeded = InteractableObject.none;
+        currentParticle.SetActive(false);
         Pool.instance.GetItemFromPool(niceParticle, transform.position);
 
         SoundManager.instance.PlaySound(repairSound);
-
         sprite.enabled = false;
         isOn = false;
     }
@@ -41,6 +42,7 @@ public class Damages_Zone : Item_Drop_Area_Template
     {
         Inventory.instance.SetCurrentItem2(InteractableObject.none);
         objectNeeded = InteractableObject.none;
+        currentParticle.SetActive(false);
         Pool.instance.GetItemFromPool(niceParticle, transform.position);
 
         SoundManager.instance.PlaySound(repairSound);
@@ -65,13 +67,17 @@ public class Damages_Zone : Item_Drop_Area_Template
         if (objectNeeded == InteractableObject.electric)
         {
 
-            Pool.instance.GetItemFromPool(electricParticle, transform.position);
+            //Pool.instance.GetItemFromPool(electricParticle, transform.position);
+            electricParticle.SetActive(true);
+            currentParticle = electricParticle;
 
         }
         else if(objectNeeded == InteractableObject.physical)
         {
 
-            Pool.instance.GetItemFromPool(physicalParticle, transform.position);
+            //Pool.instance.GetItemFromPool(physicalParticle, transform.position);
+            physicalParticle.SetActive(true);
+            currentParticle = physicalParticle;
 
         }
 
