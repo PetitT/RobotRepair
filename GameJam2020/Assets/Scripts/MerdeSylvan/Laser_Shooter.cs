@@ -70,8 +70,8 @@ public class Laser_Shooter : Item_Drop_Area_Template
         if (isOn && Inventory.instance.superPowerAmmo == true && Time.time > ultraStart + ultraCooldown)
         {
 
-            FindObjectOfType<Inventory>().currentItem1 = InteractableObject.none;
-            FindObjectOfType<Inventory>().currentItem2 = InteractableObject.none;
+            Inventory.instance.SetCurrentItem1(InteractableObject.none);
+            Inventory.instance.SetCurrentItem2(InteractableObject.none);
 
             Mecha.GetComponent<Animator>().SetTrigger("FIRE");
             MechaCannon.GetComponent<Animator>().SetTrigger("FIRE");
