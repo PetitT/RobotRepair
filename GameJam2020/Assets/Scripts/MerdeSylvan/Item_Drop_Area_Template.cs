@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ public abstract class Item_Drop_Area_Template : MonoBehaviour
 
     public InteractableObject objectNeeded;
     public bool isOn = false;
+    private bool playerOneHere;
+    private bool playerTwoHere;
     [SerializeField] SpriteRenderer aura;
 
     #endregion
@@ -17,18 +20,44 @@ public abstract class Item_Drop_Area_Template : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        if (collision.gameObject.tag == "Player" && isOn)
+
+
+        if (collision.gameObject.tag == "Player1" && isOn)
         {
             if (aura != null)
                 aura.enabled = true;
 
-            if (collision.gameObject.GetComponent<Inventory>().currentItem == objectNeeded)
+            playerOneHere = true;
+
+            if (Inventory.instance.currentItem1 == objectNeeded)
             {
 
-                ActiveAreaEffects();
+                ActiveAreaEffects1();
 
             }
 
+        }
+
+        if (collision.gameObject.tag == "Player2" && isOn)
+        {
+            if (aura != null)
+                aura.enabled = true;
+
+            playerTwoHere = true;
+
+            if (Inventory.instance.currentItem2 == objectNeeded)
+            {
+
+                ActiveAreaEffects2();
+
+            }
+
+        }
+
+        if(playerOneHere == true && playerTwoHere == true)
+        {
+
+            ActiveAreaTogether();
         }
 
     }
@@ -39,12 +68,28 @@ public abstract class Item_Drop_Area_Template : MonoBehaviour
         if (aura != null)
             aura.enabled = false;
 
+        if (collision.gameObject.tag == "Player1")
+        {
+
+            playerOneHere = false;
+
+        }
+
+        if (collision.gameObject.tag == "Player2")
+        {
+
+            playerTwoHere = false;
+
+        }
+
     }
 
     #endregion
     #region Methods
 
-    public abstract void ActiveAreaEffects();
+    public abstract void ActiveAreaEffects1();
+    public abstract void ActiveAreaEffects2();
+    public abstract void ActiveAreaTogether();
 
     #endregion
 

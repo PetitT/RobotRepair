@@ -5,8 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class StartGame : MonoBehaviour
 {
-    public void BeginGame()
+    public void BeginSoloGame()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("SoloGame");
     }
+
+    public void BeginCoopGame()
+    {
+
+        SceneManager.LoadScene("CoopGame");
+
+    }
+
+    public void ExitGame()
+    {
+
+        Application.Quit();
+
+    }
+
 }

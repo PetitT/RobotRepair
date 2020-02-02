@@ -13,8 +13,15 @@ public class Damages_Manager : MonoBehaviour
     public event Action onDeath;
     public event Action onDamageTaken;
 
+    private int punchNumber;
+
     [SerializeField] private AudioClip punchSound;
     [SerializeField] private AudioClip explosionSound;
+    [SerializeField] private AudioClip walkSound;
+    [SerializeField] private Animator bodyMechaAnim;
+    [SerializeField] private Animator canonMech;
+
+    private Animation currentAnimation;
 
     public static Damages_Manager instance;
     #endregion
@@ -26,6 +33,9 @@ public class Damages_Manager : MonoBehaviour
             Destroy(this);
         else
             instance = this;
+
+        punchNumber = 0;
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -36,7 +46,26 @@ public class Damages_Manager : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
 
-            SoundManager.instance.PlaySound(punchSound);
+            if (punchNumber == 0)
+            {
+
+                bodyMechaAnim.SetTrigger("PunchOne");
+                canonMech.SetTrigger("CannonOne");
+                punchNumber++;
+
+                bodyMechaAnim.ResetTrigger("PunchTwo");
+
+            }
+            else if (punchNumber == 1)
+            {
+
+                bodyMechaAnim.SetTrigger("PunchTwo");
+                canonMech.SetTrigger("CannonTwo");
+                punchNumber--;
+
+                bodyMechaAnim.ResetTrigger("PunchOne");
+
+            }
 
             InteractableObject enemyTypeVar = collision.gameObject.GetComponent<EnemyIdentifyer>().ID;
 
@@ -68,8 +97,6 @@ public class Damages_Manager : MonoBehaviour
                     break;
             }
 
-            SoundManager.instance.PlaySound(explosionSound);
-
         }
 
     }
@@ -87,7 +114,7 @@ public class Damages_Manager : MonoBehaviour
                 disabledZone.Add(item);
         }
 
-        if (disabledZone.Count == 1)
+        if (disabledZone.Count == 2)
         {
             onDeath?.Invoke();
         }
@@ -99,6 +126,28 @@ public class Damages_Manager : MonoBehaviour
         }
 
     }
+
+    public void WalkSound()
+    {
+
+        SoundManager.instance.PlaySound(walkSound);
+
+    }
+
+    public void ExplosionSound()
+    {
+
+        SoundManager.instance.PlaySound(explosionSound);
+
+    }
+
+    public void PunchSound()
+    {
+
+        SoundManager.instance.PlaySound(punchSound);
+
+    }
+
     #endregion
 
 

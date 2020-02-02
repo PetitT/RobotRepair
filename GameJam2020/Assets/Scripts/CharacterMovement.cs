@@ -39,6 +39,8 @@ public class CharacterMovement : MonoBehaviour
     private bool isGrounded = false;
     private bool isFalling = false;
 
+    [SerializeField] private AudioClip walk;
+
     private AnimState currentState = AnimState.idle;
 
     private void Start()
@@ -86,7 +88,7 @@ public class CharacterMovement : MonoBehaviour
     {
         if (isGrounded)
         {
-            if (Input.GetButtonDown(jump) )
+            if (Input.GetButton(jump))
             {
                 isGrounded = false;
                 YMove = baseJumpForce;
@@ -205,4 +207,12 @@ public class CharacterMovement : MonoBehaviour
             }
         }
     }
+
+    public void WalkSound()
+    {
+
+        SoundManager.instance.PlaySound(walk);
+
+    }
+
 }

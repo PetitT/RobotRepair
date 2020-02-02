@@ -77,4 +77,20 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.1
+    functionName: WalkSound
+    data: 
+    objectReferenceParameter: {fileID: 2472010140939646782, guid: 0dc558898259e4a41ba8d2808e0b1031,
+      type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.31666666
+    functionName: WalkSound
+    data: 
+    objectReferenceParameter: {fileID: 2472010140939646782, guid: 0dc558898259e4a41ba8d2808e0b1031,
+      type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

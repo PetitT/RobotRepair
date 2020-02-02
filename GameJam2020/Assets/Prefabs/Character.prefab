@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 2472010140939646784}
   - component: {fileID: 2472010140939646785}
   - component: {fileID: 2472010140939646788}
-  - component: {fileID: 2472010140939646789}
   - component: {fileID: 2472010140939646786}
-  - component: {fileID: 2472010141611652227}
+  - component: {fileID: 1177675583}
+  - component: {fileID: 1177675581}
   m_Layer: 0
   m_Name: Character
-  m_TagString: Untagged
+  m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 2472010140939646782}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.45, y: 1.01, z: 0}
-  m_LocalScale: {x: 0.494, y: 0.494, z: 0.494}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children:
   - {fileID: 2472010141021230710}
   m_Father: {fileID: 0}
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: cdc8ce6e014910b44831359e080251fb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -117,8 +117,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 640534289bd58dd4c989058b9469c6f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalAxis: 
-  jump: 
+  horizontalAxis: Horizontal
+  jump: Jump
   anim: {fileID: 2472010140939646785}
   sprite: {fileID: 2472010140939646784}
   baseMoveSpeed: 5
@@ -133,7 +133,29 @@ MonoBehaviour:
   distanceFromGround: 0.05
   jumpIncTimer: 0.3
   jumpIncForce: 10
---- !u!60 &2472010140939646789
+  walk: {fileID: 8300000, guid: 13d40d9e6010dda49800cb5fa52f922b, type: 3}
+--- !u!50 &2472010140939646786
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2472010140939646782}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!60 &1177675583
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -250,28 +272,7 @@ PolygonCollider2D:
       - {x: -0.68, y: -0.285}
       - {x: -0.71, y: -0.325}
       - {x: -0.69, y: -0.315}
---- !u!50 &2472010140939646786
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2472010140939646782}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!114 &2472010141611652227
+--- !u!114 &1177675581
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -280,14 +281,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2472010140939646782}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3ccb83d0ec453e4fb6124f469fc8096, type: 3}
+  m_Script: {fileID: 11500000, guid: c57f5c67ce1577d4983dbae0dff5f758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentItem: 0
-  currentLootableObject: 0
-  grabParticle: {fileID: 5407482857221948560, guid: df5b0c32ea3638b4f82f454f6402ee7b,
-    type: 3}
-  grabSound: {fileID: 8300000, guid: fc8e785edcb97024086c3946091887e8, type: 3}
 --- !u!1 &2472010141021230711
 GameObject:
   m_ObjectHideFlags: 0

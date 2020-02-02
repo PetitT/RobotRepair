@@ -6,6 +6,10 @@ TagManager:
   tags:
   - LootablePile
   - Enemy
+  - FxTemporaire
+  - Endpoint Background
+  - Player1
+  - Player2
   layers:
   - Default
   - TransparentFX

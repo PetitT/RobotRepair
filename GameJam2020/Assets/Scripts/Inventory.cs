@@ -4,13 +4,24 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public InteractableObject currentItem = InteractableObject.none;
+    public InteractableObject currentItem1 = InteractableObject.none;
+    public InteractableObject currentItem2 = InteractableObject.none;
 
-    public InteractableObject currentLootableObject;
+    public InteractableObject currentLootableObject1;
+    public InteractableObject currentLootableObject2;
 
-    [SerializeField] private string grab;
+    public bool superPowerAmmo;
+
+    [SerializeField] private string grab1;
+    [SerializeField] private string grab2;
     [SerializeField] private GameObject grabParticle;
     [SerializeField] private AudioClip grabSound;
+    [SerializeField] private SpriteRenderer superAmmoSpriteInfo;
+
+    [SerializeField]
+    private GameObject Player1;
+    [SerializeField]
+    private GameObject Player2;
 
     public static Inventory instance;
 
@@ -24,40 +35,60 @@ public class Inventory : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown(grab))
+        if (Input.GetButtonDown(grab1))
         {
             Debug.Log("hiku");
-            currentItem = currentLootableObject;
-            if(currentItem != InteractableObject.none)
+            currentItem1 = currentLootableObject1;
+            if(currentItem1 != InteractableObject.none)
             {
 
                 SoundManager.instance.PlaySound(grabSound);
 
-                Pool.instance.GetItemFromPool(grabParticle, transform.position);
+                Pool.instance.GetItemFromPool(grabParticle, Player1.transform.position);
 
             }
         }
-    }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("LootablePile"))
+        if(currentItem1 == currentItem2 && currentItem1 == InteractableObject.ammo)
         {
-            currentLootableObject = collision.GetComponent<LootablePile>().item;
-        }
-    }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("LootablePile"))
+            superPowerAmmo = true;
+            superAmmoSpriteInfo.enabled = true;
+
+        }
+        else
         {
-            currentLootableObject = InteractableObject.none;
+
+            superPowerAmmo = false;
+            superAmmoSpriteInfo.enabled = false;
+
         }
+
+        if (Input.GetButtonDown(grab2))
+        {
+            Debug.Log("hiku");
+            currentItem2 = currentLootableObject2;
+            if (currentItem2 != InteractableObject.none)
+            {
+
+                SoundManager.instance.PlaySound(grabSound);
+
+                Pool.instance.GetItemFromPool(grabParticle, Player2.transform.position);
+
+            }
+        }
+
     }
 
-    public void SetCurrentItem(InteractableObject item)
+    public void SetCurrentItem1(InteractableObject item)
     {
-        currentItem = item;
+        currentItem1 = item;
     }
+
+    public void SetCurrentItem2(InteractableObject item)
+    {
+        currentItem2 = item;
+    }
+
 }
 

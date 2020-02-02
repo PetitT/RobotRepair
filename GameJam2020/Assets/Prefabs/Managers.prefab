@@ -45,7 +45,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.41
+  m_Volume: 0.25
   m_Pitch: 2
   Loop: 0
   Mute: 0
@@ -526,7 +526,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBeforeDefeat: 1
-  deathScreen: {fileID: 0}
+  deathScreen: {fileID: 4826560601618795282, guid: cf4459ca0d0a2f7479d1716a88538afe,
+    type: 3}
 --- !u!114 &4775303520255417264
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -71,8 +71,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: b53b4a89eeb920c4c871944df02efbe5, type: 3}
+  m_SortingOrder: 4
+  m_Sprite: {fileID: 21300000, guid: 2df18d2248be1174bb6b975b93ba9641, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -97,6 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectNeeded: 0
   isOn: 0
+  aura: {fileID: 0}
   sprite: {fileID: 3708330516828896024}
   electricParticle: {fileID: 2813095031033898634, guid: 1e6db1c8f79933d40a58cf1c70b72e24,
     type: 3}
