@@ -286,6 +286,7 @@ MonoBehaviour:
   - {fileID: 576656402}
   - {fileID: 3426424032059974762}
   - {fileID: 3492884174358362426}
+  - {fileID: 0}
   wallchecksLeft:
   - {fileID: 4735803145699399350}
   - {fileID: 666979101750984909}
@@ -293,7 +294,7 @@ MonoBehaviour:
   - {fileID: 4090458321177641488}
   - {fileID: 6714783383665916213}
   wallDistance: 0.05
-  baseJumpForce: 5
+  baseJumpForce: 4.5
   gravity: 10
   groundCheck: {fileID: 2472010141021230710}
   ground:

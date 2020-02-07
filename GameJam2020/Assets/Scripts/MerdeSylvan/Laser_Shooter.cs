@@ -14,6 +14,8 @@ public class Laser_Shooter : Item_Drop_Area_Template
     [SerializeField] GameObject ultraLaser;
     [SerializeField] AudioClip laserClip;
     [SerializeField] Animator anim;
+    [SerializeField] Animator rejectedBullet;
+    [SerializeField] Animator cannon;
 
     private float ultraStart = 0f;
     public float ultraCooldown = 10f;
@@ -37,12 +39,15 @@ public class Laser_Shooter : Item_Drop_Area_Template
         if (isOn && Inventory.instance.superPowerAmmo == false)
         {
            
-            Pool.instance.GetItemFromPool(laser, Mecha.position);
+            Pool.instance.GetItemFromPool(laser, MechaCannon.position);
             SoundManager.instance.PlaySound(laserClip);
             Inventory.instance.SetCurrentItem1(InteractableObject.none);
 
 
-            anim.SetTrigger("CannonOne");
+            anim.SetTrigger("Shoot");
+            cannon.SetTrigger("CannonShoot");
+            rejectedBullet.SetTrigger("FireBullet");
+
 
             onShoot?.Invoke();
 
@@ -54,10 +59,13 @@ public class Laser_Shooter : Item_Drop_Area_Template
     {
         if (isOn && Inventory.instance.superPowerAmmo == false)
         {
-            Pool.instance.GetItemFromPool(laser, Mecha.position);
+            Pool.instance.GetItemFromPool(laser, MechaCannon.position);
             SoundManager.instance.PlaySound(laserClip);
             Inventory.instance.SetCurrentItem2(InteractableObject.none);
-            anim.SetTrigger("CannonOne");
+
+            anim.SetTrigger("Shoot");
+            cannon.SetTrigger("CannonShoot");
+            rejectedBullet.SetTrigger("FireBullet");
 
             onShoot?.Invoke();
         }
