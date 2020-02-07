@@ -1,0 +1,12 @@
+07/02/20
+
+v 1.01
+
+-Ajout des animations corrective de Dorill pour le mecha.
+-Ajout d'une nouvelle animation de tir. Recalibrages des fichiers en fonction de ce nouvel ajout.
+-Transport de certaines images en UI.
+-Diverse correction mineure.
+
+-Le fade n'est pas réactiver pour permettre de travailler plus facilement, ne pas oublier de le réactiver avant un build
+
+by Sylvan
