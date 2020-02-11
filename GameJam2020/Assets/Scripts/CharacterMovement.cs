@@ -7,6 +7,7 @@ public class CharacterMovement : MonoBehaviour
 
     [Header("Controls")]
     public string horizontalAxis;
+    public string verticalAxis;
     public string jump;
 
     [Header("Animation")]
@@ -21,7 +22,9 @@ public class CharacterMovement : MonoBehaviour
     public LayerMask wall;
     public List<Transform> wallchecksRight;
     public List<Transform> wallchecksLeft;
+    public List<Transform> wallchecksUp;
     private List<Transform> currentWallChecks;
+    private List<Transform> currentWallUpChecks;
     public float wallDistance;
 
     [Header("Jump")]
@@ -40,9 +43,11 @@ public class CharacterMovement : MonoBehaviour
     private float currentJumpIncTimer;
     private float currentMoveSpeed;
     private float YMove;
+    private float currentGrav;
     private bool isJumping = false;
     private bool isGrounded = false;
     private bool isFalling = false;
+    private bool cantJump = false;
 
     [SerializeField] private AudioClip walk;
 
@@ -69,6 +74,7 @@ public class CharacterMovement : MonoBehaviour
     private void Move()
     {
         float X = Input.GetAxis(horizontalAxis);
+        float Y = Input.GetAxis(verticalAxis);
 
         if (X == 0)
         {
@@ -90,6 +96,21 @@ public class CharacterMovement : MonoBehaviour
             ChangeAnimState(AnimState.running);
         }
 
+        if (Y > 0)
+        {
+
+            currentWallUpChecks = wallchecksUp;
+
+        }
+        else if (Y == 0)
+        {
+
+            currentWallUpChecks = null;
+
+        }
+
+
+
         if (currentWallChecks != null)
         {
             foreach (var wallcheck in currentWallChecks)
@@ -99,6 +120,27 @@ public class CharacterMovement : MonoBehaviour
                     X = 0;
                 }
             }
+        }
+
+        if (currentWallUpChecks != null)
+        {
+
+            foreach (var wallcheck in currentWallUpChecks)
+            {
+
+                if (Physics2D.Raycast(wallcheck.position, Vector2.up, wallDistance, wall))
+                {
+
+                    Y = 0;
+                    cantJump = true;
+                    gameObject.transform.Translate(Vector2.down * Time.fixedDeltaTime);
+
+                }              
+
+            }
+
+            cantJump = false;
+
         }
 
         gameObject.transform.Translate(Vector2.right * X * currentMoveSpeed * Time.deltaTime);
@@ -146,11 +188,11 @@ public class CharacterMovement : MonoBehaviour
 
     private void ApplyGravity()
     {
-        if (!isGrounded)
+        if (!isGrounded && cantJump == false)
         {
             YMove -= gravity * Time.deltaTime;
         }
-        else if (isGrounded)
+        else if (isGrounded && cantJump == false)
         {
             YMove = 0f;
         }
@@ -168,11 +210,11 @@ public class CharacterMovement : MonoBehaviour
 
     private void CheckFall()
     {
-        if (YMove <= 0)
+        if (YMove <= 0 && cantJump == false)
         {
             isFalling = true;
         }
-        else if (YMove > 0)
+        else if (YMove > 0 && cantJump == false)
         {
             isFalling = false;
             // ChangeAnimState(AnimState.landing);
